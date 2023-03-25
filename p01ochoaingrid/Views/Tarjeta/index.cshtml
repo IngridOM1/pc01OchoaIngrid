@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Resta de componentes</title>
+	<link rel="stylesheet" type="text/css" href="css/TarjetaIndex.css">
+</head>
+<body>
+	<div class="formulario">
+		<h1>REALIZA TU PAGO!</h1>
+		<form>
+			<label for="numTar">NUMERO DE TARJETA:</label>
+			<input type="text" id="numTar" name="numTar"><br>
+			<label for="pago">PAGO:</label>
+			<input type="number" id="pago" name="pago"><br>
+			<label>FECHA QUE VENCIÓ EL PAGO:</label>
+			<input type="date" id="fecha1" required>
+			<br>
+			<label>FECHA QUE REALIZA EL PAGO:</label>
+			<input type="date" id="fecha2" value="2023-03-24" readonly>
+			<br>
+			<input type="button" value="Restar" onclick="restarFechas()">
+		</form>
+		<p id="resultado"></p>
+	</div>
+	<script>
+
+		function restarFechas() {
+			var fecha1 = document.getElementById("fecha1").value;
+			var fecha2 = document.getElementById("fecha2").value;
+			var pago= document.getElementById("pago").value;
+			var timestamp1 = new Date(fecha1).getTime();
+			var timestamp2 = new Date(fecha2).getTime();
+			var diferencia = Math.abs(timestamp2 - timestamp1) / (1000 * 60 * 60 * 24); // Diferencia en días
+			document.getElementById("resultado").innerHTML = "El monto a pagar es " + pago+(diferencia*0.00005*pago) + " nuevos soles";
+		
+		}
+	</script>
+</body>
+</html>
